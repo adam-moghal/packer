@@ -13,6 +13,7 @@
       "source_ami": "{{user `ami_id`}}",
       "instance_type": "t2.micro",
       "ssh_username": "ubuntu",
+      "s3_bucket": "packer-ami-images",
       "ami_name": "MiddleTier-{{isotime | clean_ami_name}}",
       "ami_description": "Amazing AMI Designed by Fantastic Architect",
       "tags": {
@@ -27,17 +28,12 @@
     {
       "type":"shell",
       "inline":[
-        "sh ./ansible.sh"
+        "sh ansible.sh"
       ]
     },
     {
       "type": "ansible-local",
       "playbook_file": "./playbook.yml"
     }
-<<<<<<< HEAD
-]
-}
-=======
   ]
 }
->>>>>>> 2d01d4feabaab386611337e3fe113abd84f65ea1
