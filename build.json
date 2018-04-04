@@ -27,7 +27,7 @@
     {
       "type":"shell",
       "inline":[
-        "sh ./ansible.sh"
+        "sh ansible.sh"
       ]
     },
     {
