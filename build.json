@@ -13,7 +13,6 @@
       "source_ami": "{{user `ami_id`}}",
       "instance_type": "t2.micro",
       "ssh_username": "ubuntu",
-      "s3_bucket": "packer-ami-images",
       "ami_name": "MiddleTier-{{isotime | clean_ami_name}}",
       "ami_description": "Amazing AMI Designed by Fantastic Architect",
       "tags": {
@@ -28,26 +27,15 @@
     {
       "type":"shell",
       "inline":[
-<<<<<<< HEAD
-        "sh ansible.sh"
-=======
         "sudo apt-get install software-properties-common",
         "sudo apt-add-repository ppa:ansible/ansible",
         "sudo apt-get update",
         "sudo apt-get install -y ansible"
->>>>>>> c6e81f4b1dd6aa16f4185808418a0133fd6df327
       ]
     },
     {
       "type": "ansible-local",
       "playbook_file": "./playbook.yml"
     }
-<<<<<<< HEAD
   ]
 }
-=======
-]
-}
-
-
->>>>>>> c6e81f4b1dd6aa16f4185808418a0133fd6df327

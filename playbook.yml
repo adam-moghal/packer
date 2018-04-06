@@ -9,3 +9,10 @@
     - name: Installing Git
       apt: name=git update_cache=yes
     
+    - name: Installing Java
+      apt: name=default-jdk update_cache=yes
+
+    - name: Installing Jenkins
+      apt: name=jenkins update_cache=yes
+
+  
