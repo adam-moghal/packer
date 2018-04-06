@@ -12,7 +12,20 @@
     - name: Installing Java
       apt: name=default-jdk update_cache=yes
 
-    - name: Installing Jenkins
-      apt: name=jenkins update_cache=yes
+    - name: Getting jenkins repo
+      shell: "wget -q -O - https://pkg.jenkins.io/debian/jenkins-ci.org.key | sudo apt-key add -"
 
+    - name: echo jenkins binary
+      shell: sh -c 'echo deb http://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'
   
+    - name: Install Jenkins
+      apt: name=jenkins update_cache=yes
+    
+    #  - name: Get terraform zip
+    #    shell: "wget https://releases.hashicorp.com/terraform/0.11.6/terraform_0.11.6_linux_amd64.zip -O /Downloads"
+
+    #  - name: cd to downloads
+    #    shell: cd ~/Downloads
+
+    #  - name: Extract terraform
+    #    command: unzip terraform_0.11.6_linux_amd64.zip
