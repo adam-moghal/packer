@@ -1,8 +1,9 @@
-- hosts: all
+- hosts: aws-ec2
   sudo: yes
   tasks:
     - name: Installing nginx
       apt: name=nginx update_cache=yes
+
     - name: Starting nginx on boot
       service: name=nginx enabled=yes state=started
 
@@ -21,11 +22,29 @@
     - name: Install Jenkins
       apt: name=jenkins update_cache=yes
     
-    #  - name: Get terraform zip
-    #    shell: "wget https://releases.hashicorp.com/terraform/0.11.6/terraform_0.11.6_linux_amd64.zip -O /Downloads"
+    - name: install unzip
+      apt: name=unzip update_cache=yes
 
-    #  - name: cd to downloads
-    #    shell: cd ~/Downloads
+    - name: Get Hashicorp
+      shell: "wget {{item}}"
+      with_items:
+         -  https://releases.hashicorp.com/terraform/0.11.6/terraform_0.11.6_linux_amd64.zip
+         -  https://releases.hashicorp.com/packer/1.2.2/packer_1.2.2_linux_amd64.zip
+         -  https://releases.hashicorp.com/vault/0.9.6/vault_0.9.6_linux_amd64.zip
+         -  https://releases.hashicorp.com/consul/1.0.6/consul_1.0.6_linux_amd64.zip
 
-    #  - name: Extract terraform
-    #    command: unzip terraform_0.11.6_linux_amd64.zip
+    - name: Extract Hashicorp stuff
+      command: unzip {{item}}
+      with_items:
+         - terraform_0.11.6_linux_amd64.zip
+         - packer_1.2.2_linux_amd64.zip
+         - vault_0.9.6_linux_amd64.zip
+         - consul_1.0.6_linux_amd64.zip
+
+    - name: Move hashicorp stuff Folders to usr/local/bin
+      command: sudo cp {{item}} /usr/local/bin
+      with_items:
+         - terraform
+         - packer
+         - vault
+         - consul

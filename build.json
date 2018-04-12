@@ -14,15 +14,15 @@
       "instance_type": "t2.micro",
       "ssh_username": "ubuntu",
       "ami_name": "MiddleTier-{{isotime | clean_ami_name}}",
-      "ami_description": "Amazing AMI Designed by Fantastic Architect",
+      "ami_description": "AMI with ansible playbook",
       "tags": {
         "role": "MiddleTier"
       },
       "run_tags": {
         "role": "buildSystem"
-      }
-    }
-  ],
+      } 
+    }],
+    
   "provisioners": [
     {
       "type":"shell",
